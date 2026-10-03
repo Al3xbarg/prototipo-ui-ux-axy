@@ -14,5 +14,6 @@ node_modules
 .next/
 .DS_Store
 
-# Reportes de pruebas (generados por el pipeline)
+# Reportes de pruebas y cobertura (generados por el pipeline)
 test-results/
+coverage/

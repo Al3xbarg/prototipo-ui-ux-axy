@@ -10,5 +10,13 @@ export default defineConfig({
     outputFile: {
       junit: './test-results/junit.xml',
     },
+    // Cobertura para SonarQube (genera coverage/lcov.info).
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      reportsDirectory: './coverage',
+      include: ['lib/**/*.ts'],
+      exclude: ['**/*.test.ts'],
+    },
   },
 })

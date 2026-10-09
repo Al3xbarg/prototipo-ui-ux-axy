@@ -62,16 +62,9 @@ pipeline {
                             // Reporte HTML (siempre, aunque haya vulnerabilidades)
                             sh 'snyk test --all-projects --json-file-output=snyk_results.json || true'
                             sh 'snyk-to-html -i snyk_results.json -o snyk_report.html || true'
+                            // El reporte queda como artefacto descargable del build.
+                            // (publishHTML se omite porque requiere el plugin "HTML Publisher")
                             archiveArtifacts artifacts: 'snyk_report.html, snyk_results.json', allowEmptyArchive: true
-                            // Publica el reporte en Jenkins (requiere el plugin "HTML Publisher")
-                            publishHTML target: [
-                                allowMissing: true,
-                                alwaysLinkToLastBuild: true,
-                                keepAll: true,
-                                reportDir: '.',
-                                reportFiles: 'snyk_report.html',
-                                reportName: 'Snyk Security Report'
-                            ]
                         }
                     }
                 }
